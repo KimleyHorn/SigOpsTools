@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="SigOpsMC_Sectors" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+	<name>SigOpsMC_Sectors</name>
+	<open>1</open>
+	<snippet></snippet>
+	<StyleMap id="PolyStyle10">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#PolyStyle100</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#PolyStyle101</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="PolyStyle100">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80fec6c7</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle101">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80fec6c7</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle20">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80b6ffb4</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle200">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80b6ffb4</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="PolyStyle201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#PolyStyle200</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#PolyStyle20</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="PolyStyle30">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#PolyStyle301</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#PolyStyle300</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="PolyStyle300">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80b4c7ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle301">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80b4c7ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle40">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80f9fdd4</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="PolyStyle400">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#PolyStyle401</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#PolyStyle40</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="PolyStyle401">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80f9fdd4</color>
+		</PolyStyle>
+	</Style>
+	<Style id="PolyStyle50">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80c9fdfd</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="PolyStyle500">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#PolyStyle50</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#PolyStyle501</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="PolyStyle501">
+		<LabelStyle>
+			<color>00000000</color>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff000000</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80c9fdfd</color>
+		</PolyStyle>
+	</Style>
+	<Placemark id="ID_10000">
+		<name>MID - Buckhead_Midtown</name>
+		<snippet></snippet>
+		<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">					
+									
+<head>									
+									
+<META http-equiv="Content-Type" content="text/html">									
+									
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">									
+									
+</head>									
+									
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">									
+									
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">									
+									
+<td>MID - Buckhead_Midtown</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>Name</td>									
+									
+<td>MID - Buckhead_Midtown</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>HighPrioritySignals</td>									
+									
+<td>139</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>NeutralPrioritySignals</td>									
+									
+<td>98</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>LowPrioritySignals</td>									
+									
+<td>27</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>TotalSignals</td>									
+									
+<td>264</td>									
+									
+</tr>									
+									
+</table>									
+									
+</td>									
+									
+</tr>									
+									
+</table>									
+									
+</body><script type="text/javascript">									
+									
+				function changeImage(attElement, nameElement) {					
+									
+				document.getElementById('imageAttachment').src = attElement;					
+									
+				document.getElementById('imageName').innerHTML = nameElement;}					
+									
+			</script></html>]]></description>
+		<styleUrl>#PolyStyle10</styleUrl>
+		<MultiGeometry>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-84.40672574899997,33.81138162912725,0 -84.40622414136848,33.7929292375413,0 -84.40635176099994,33.7768100611277,0 -84.40519711399998,33.77635879012772,0 -84.40269862999997,33.7700270831278,0 -84.40150014099999,33.76493288412789,0 -84.38961880199997,33.76663178612786,0 -84.37962369299998,33.76697694312788,0 -84.37868070999997,33.77411748412774,0 -84.36025783799994,33.77664205412768,0 -84.34553765999993,33.77928995512771,0 -84.34724174199994,33.78402785012765,0 -84.34711957899998,33.78914581612759,0 -84.34243741699999,33.79028178012752,0 -84.34425786699995,33.79379057512751,0 -84.33923520399998,33.79321979012753,0 -84.33945403999996,33.79805672212746,0 -84.33682155199995,33.80080684612741,0 -84.33294193099994,33.79909758612746,0 -84.33055365799999,33.79482821612748,0 -84.32691200299996,33.78989575012758,0 -84.32120542199993,33.78913424712756,0 -84.31526258899999,33.79093211012756,0 -84.31638996799995,33.79567438912748,0 -84.30690977599994,33.7955736011275,0 -84.30951881199996,33.80088794012741,0 -84.31864467099996,33.80554331312734,0 -84.32481852799998,33.80421767512739,0 -84.32721779399998,33.80421880012737,0 -84.32789840799995,33.80611730212737,0 -84.32971706699999,33.80991527212731,0 -84.33109347899995,33.80782727312732,0 -84.33555516399997,33.80536119312736,0 -84.34663645199998,33.80545987612736,0 -84.34707840999994,33.81457416712723,0 -84.34797662899996,33.8244553081271,0 -84.34879517399997,33.82838942512709,0 -84.34860402599998,33.83149212712703,0 -84.34773464799997,33.84655408112687,0 -84.34821412599996,33.85528500112677,0 -84.34798300799997,33.86543599812662,0 -84.34783039699994,33.87858809512644,0 -84.36149894599998,33.87885975612645,0 -84.37645770399996,33.87936161412645,0 -84.39548621099993,33.87958765612645,0 -84.42006237899994,33.88012897112647,0 -84.43107910599997,33.88023754012643,0 -84.42914972599993,33.87553043212649,0 -84.42772774499997,33.87107882012652,0 -84.40438861599995,33.85226307312678,0 -84.40672574899997,33.81138162912725,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</MultiGeometry>
+	</Placemark>
+	<Placemark id="ID_20000">
+		<name>NE - Brookhaven_Dunwoody</name>
+		<snippet></snippet>
+		<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">					
+									
+<head>									
+									
+<META http-equiv="Content-Type" content="text/html">									
+									
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">									
+									
+</head>									
+									
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">									
+									
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">									
+									
+<td>NE - Brookhaven_Dunwoody</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>Name</td>									
+									
+<td>NE - Brookhaven_Dunwoody</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>HighPrioritySignals</td>									
+									
+<td>88</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>NeutralPrioritySignals</td>									
+									
+<td>77</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>LowPrioritySignals</td>									
+									
+<td>31</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>TotalSignals</td>									
+									
+<td>196</td>									
+									
+</tr>									
+									
+</table>									
+									
+</td>									
+									
+</tr>									
+									
+</table>									
+									
+</body><script type="text/javascript">									
+									
+				function changeImage(attElement, nameElement) {					
+									
+				document.getElementById('imageAttachment').src = attElement;					
+									
+				document.getElementById('imageName').innerHTML = nameElement;}					
+									
+			</script></html>]]></description>
+		<styleUrl>#PolyStyle201</styleUrl>
+		<MultiGeometry>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-84.34831216765143,33.82818404014109,0 -84.33433955977682,33.82419899753131,0 -84.31677909899997,33.82060403912715,0 -84.27638282899994,33.87351364812654,0 -84.26679459699994,33.88612102712637,0 -84.26614994699997,33.89352208812626,0 -84.26146407999994,33.90129413012617,0 -84.25880338599995,33.90752580412608,0 -84.26000059299997,33.91726160612599,0 -84.26114634799995,33.93234048512578,0 -84.26583051299997,33.94239423212569,0 -84.26677852499995,33.94955694112559,0 -84.27035251699994,33.95600690412549,0 -84.27776203099995,33.95674402512544,0 -84.29374371299997,33.95919364912544,0 -84.30420477899997,33.96249363212543,0 -84.32122817299995,33.96653360612534,0 -84.33710649699998,33.96972080112532,0 -84.34612923699996,33.9665490121254,0 -84.34692946224234,33.9634642226742,0 -84.34753119551937,33.93053409556234,0 -84.34796416870471,33.92865448888169,0 -84.34778810579955,33.91981131908359,0 -84.34779905753372,33.91923144449558,0 -84.34741445001919,33.89877700541212,0 -84.34831216765143,33.82818404014109,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</MultiGeometry>
+	</Placemark>
+	<Placemark id="ID_30000">
+		<name>NW - CoSS</name>
+		<snippet></snippet>
+		<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">					
+									
+<head>									
+									
+<META http-equiv="Content-Type" content="text/html">									
+									
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">									
+									
+</head>									
+									
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">									
+									
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">									
+									
+<td>NW - CoSS</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>Name</td>									
+									
+<td>NW - CoSS</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>HighPrioritySignals</td>									
+									
+<td>57</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>NeutralPrioritySignals</td>									
+									
+<td>48</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>LowPrioritySignals</td>									
+									
+<td>30</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>TotalSignals</td>									
+									
+<td>135</td>									
+									
+</tr>									
+									
+</table>									
+									
+</td>									
+									
+</tr>									
+									
+</table>									
+									
+</body><script type="text/javascript">									
+									
+				function changeImage(attElement, nameElement) {					
+									
+				document.getElementById('imageAttachment').src = attElement;					
+									
+				document.getElementById('imageName').innerHTML = nameElement;}					
+									
+			</script></html>]]></description>
+		<styleUrl>#PolyStyle30</styleUrl>
+		<MultiGeometry>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-84.34777989799994,33.87881746312647,0 -84.34734724299994,33.90949534512603,0 -84.34783275899997,33.91998105012591,0 -84.34816681699994,33.92892107612582,0 -84.34665042099994,33.94685937912559,0 -84.34656890599996,33.96048830812541,0 -84.34718226499996,33.96646605912539,0 -84.34236569399997,33.96866133112535,0 -84.33549516799997,33.97000098912535,0 -84.31881400099996,33.96620393612537,0 -84.27923549699995,33.95593140212551,0 -84.25929244599996,33.96773994012533,0 -84.27678978399996,33.97900778912518,0 -84.29610476099998,33.9880975021251,0 -84.30505132499997,33.98712276212513,0 -84.31780658399998,33.98516933612515,0 -84.32899495799995,34.00472948712491,0 -84.33260505299995,34.01132118612484,0 -84.35428266399998,34.00523949212486,0 -84.37541074099994,34.00007634912492,0 -84.38142405199994,33.99884822712496,0 -84.38768973099997,33.97981559812521,0 -84.39863395999998,33.95101124112555,0 -84.40976194199999,33.94226513112565,0 -84.44281697799994,33.91359586912601,0 -84.44521250099996,33.90107730912619,0 -84.44365810599999,33.8805250431264,0 -84.34777989799994,33.87881746312647,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</MultiGeometry>
+	</Placemark>
+	<Placemark id="ID_40000">
+		<name>SE - Downtown</name>
+		<snippet></snippet>
+		<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">					
+									
+<head>									
+									
+<META http-equiv="Content-Type" content="text/html">									
+									
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">									
+									
+</head>									
+									
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">									
+									
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">									
+									
+<td>SE - Downtown</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>Name</td>									
+									
+<td>SE - Downtown</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>HighPrioritySignals</td>									
+									
+<td>132</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>NeutralPrioritySignals</td>									
+									
+<td>172</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>LowPrioritySignals</td>									
+									
+<td>86</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>TotalSignals</td>									
+									
+<td>390</td>									
+									
+</tr>									
+									
+</table>									
+									
+</td>									
+									
+</tr>									
+									
+</table>									
+									
+</body><script type="text/javascript">									
+									
+				function changeImage(attElement, nameElement) {					
+									
+				document.getElementById('imageAttachment').src = attElement;					
+									
+				document.getElementById('imageName').innerHTML = nameElement;}					
+									
+			</script></html>]]></description>
+		<styleUrl>#PolyStyle400</styleUrl>
+		<MultiGeometry>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-84.35736666799994,33.64796636412935,0 -84.34573731199998,33.64789103712936,0 -84.32830681699994,33.64833878012936,0 -84.33857162099997,33.67225469912903,0 -84.34616183499998,33.68835285312885,0 -84.34628427399997,33.68886251112886,0 -84.34676849899995,33.71211989212856,0 -84.34700923599996,33.73132552212831,0 -84.33914777899997,33.73162982812828,0 -84.33025368191031,33.71778810523055,0 -84.31888937899998,33.72559132312838,0 -84.32391795699994,33.73029505112829,0 -84.32697887499995,33.7383744051282,0 -84.32021943299998,33.73908754112819,0 -84.30387581599996,33.73877249812818,0 -84.28790623799995,33.73630798112821,0 -84.29202965999997,33.75483617312799,0 -84.30088485099998,33.75514834712799,0 -84.30863833999996,33.75289913812806,0 -84.31096519899995,33.75761183312796,0 -84.31217875799996,33.76581078112788,0 -84.31734374299998,33.76765843312785,0 -84.32607797899999,33.77002033912776,0 -84.32939873699996,33.77197017312778,0 -84.33173031299998,33.7788449941277,0 -84.34588993199998,33.77915741912769,0 -84.35290822099995,33.77772264812772,0 -84.36423443299998,33.77608362212772,0 -84.37383638499995,33.77505952612776,0 -84.37863657999998,33.77413699712778,0 -84.37899972099996,33.76982911412782,0 -84.37948789399996,33.76695810612784,0 -84.38761032199994,33.76685653812785,0 -84.40161574899997,33.76496425712789,0 -84.40123149999994,33.76120593212792,0 -84.40096524399996,33.75792392912797,0 -84.40152366999996,33.75354696212805,0 -84.40221167199996,33.74923492612806,0 -84.40109352599995,33.74462858412812,0 -84.39992706799995,33.74081680212816,0 -84.39950957099995,33.73877636112822,0 -84.39934495999995,33.73559875012823,0 -84.39955057699996,33.7319934431283,0 -84.39952299899994,33.72747921712833,0 -84.40035434399994,33.70960566312856,0 -84.40032634299996,33.69578941912872,0 -84.36437209599995,33.6842489791289,0 -84.35736666799994,33.64796636412935,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</MultiGeometry>
+	</Placemark>
+	<Placemark id="ID_50000">
+		<name>SW - Atlanta</name>
+		<snippet></snippet>
+		<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">					
+									
+<head>									
+									
+<META http-equiv="Content-Type" content="text/html">									
+									
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">									
+									
+</head>									
+									
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">									
+									
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">									
+									
+<td>SW - Atlanta</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>									
+									
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>Name</td>									
+									
+<td>SW - Atlanta</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>HighPrioritySignals</td>									
+									
+<td>79</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>NeutralPrioritySignals</td>									
+									
+<td>138</td>									
+									
+</tr>									
+									
+<tr bgcolor="#D4E4F3">									
+									
+<td>LowPrioritySignals</td>									
+									
+<td>108</td>									
+									
+</tr>									
+									
+<tr>									
+									
+<td>TotalSignals</td>									
+									
+<td>325</td>									
+									
+</tr>									
+									
+</table>									
+									
+</td>									
+									
+</tr>									
+									
+</table>									
+									
+</body><script type="text/javascript">									
+									
+				function changeImage(attElement, nameElement) {					
+									
+				document.getElementById('imageAttachment').src = attElement;					
+									
+				document.getElementById('imageName').innerHTML = nameElement;}					
+									
+			</script></html>]]></description>
+		<styleUrl>#PolyStyle500</styleUrl>
+		<MultiGeometry>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-84.35766386699999,33.64789240612933,0 -84.36454731399994,33.68432246612891,0 -84.40014889399998,33.69578942112877,0 -84.40048954599996,33.70679409912857,0 -84.39980254599999,33.71961854612842,0 -84.39972142999994,33.73152099512826,0 -84.39976648199996,33.73972130912819,0 -84.40225281170817,33.74917907583266,0 -84.40088310899995,33.75821820212797,0 -84.40208502899998,33.76798105012784,0 -84.40526467199999,33.77647193412776,0 -84.40662458799994,33.77683105812775,0 -84.40656852899997,33.7772804051277,0 -84.40645606499999,33.77822558112772,0 -84.40634454799994,33.77885686812769,0 -84.40628715699995,33.77957948512767,0 -84.40617641699998,33.77994125512767,0 -84.40617424799996,33.78048448412766,0 -84.40617243799994,33.78093770412765,0 -84.40617098899997,33.78130062712766,0 -84.40616881299997,33.78184559212768,0 -84.40627558999995,33.78257329212764,0 -84.40627365299997,33.78307430812762,0 -84.40627118499998,33.78371281412765,0 -84.40626924299994,33.78421516812764,0 -84.40626676799997,33.78485538012763,0 -84.40626535199993,33.78522164712762,0 -84.40637280899995,33.78590924012762,0 -84.40637195099998,33.78613868312758,0 -84.40642584399995,33.78646011012761,0 -84.40642499999996,33.78668984912762,0 -84.40642398599994,33.7869656981276,0 -84.40652184899994,33.8112503231273,0 -84.40484527199999,33.84009396512692,0 -84.40454239899998,33.8522206851268,0 -84.42775975799998,33.87138301612652,0 -84.43112297199997,33.88027340812642,0 -84.44172365299994,33.88038137512643,0 -84.44621030499997,33.87556008412651,0 -84.45512078999997,33.86663809512658,0 -84.45446843999997,33.85894389912669,0 -84.45994079499997,33.8527888121268,0 -84.45846456099997,33.84849643512684,0 -84.45879196399994,33.84388092112686,0 -84.46033010599996,33.83988663812693,0 -84.45526989199999,33.82504789412714,0 -84.45732797999995,33.82365417812715,0 -84.46430578799999,33.8268793621271,0 -84.47026480799997,33.82626700012712,0 -84.48066038499996,33.81716923012721,0 -84.48743673699994,33.81348649512726,0 -84.49557819099994,33.80817699012733,0 -84.49988569799996,33.80261377112738,0 -84.50504656599998,33.79693469712745,0 -84.51241640599994,33.78626272112762,0 -84.51237465899999,33.77435850412778,0 -84.51629134599995,33.76492004412788,0 -84.52663788199999,33.75917687512791,0 -84.53453559299999,33.75876765312794,0 -84.54091996499994,33.74974052812806,0 -84.53347777299996,33.73948313012819,0 -84.54093103599996,33.7334430531283,0 -84.55098753799996,33.72764815812836,0 -84.54568934799994,33.70420973312866,0 -84.54514936299995,33.69067938612881,0 -84.53820051199995,33.67715357812899,0 -84.52635028799995,33.67141895512902,0 -84.52543443899998,33.66376698712916,0 -84.52242037899998,33.66222713212917,0 -84.52277305099994,33.66207980012918,0 -84.52312571899995,33.66193246912918,0 -84.52339000899997,33.66178523412914,0 -84.52374224499994,33.6615644331292,0 -84.52391815399994,33.66141729812917,0 -84.52444712999994,33.66119630712917,0 -84.52515328599998,33.66104858712916,0 -84.52603575799998,33.66082719912916,0 -84.52638882899998,33.66075333512915,0 -84.52674189999999,33.66067947112916,0 -84.52682896499994,33.6604589771292,0 -84.52682721299999,33.66016512512919,0 -84.52717939299998,33.65994434012917,0 -84.52753112499994,33.65965009912922,0 -84.52770655199998,33.65942952512921,0 -84.51275209999994,33.65511307012929,0 -84.50621363799996,33.65445892912923,0 -84.50621228999995,33.65416529612929,0 -84.50621094299999,33.65387167212923,0 -84.50594536299997,33.65372512212929,0 -84.50585839699994,33.65401882712927,0 -84.50568279099997,33.6542392191293,0 -84.50541920599994,33.65453311012925,0 -84.50541987299994,33.65467993112931,0 -84.50515694199999,33.65512065812923,0 -84.50480900399998,33.65629568512927,0 -84.50463568299995,33.65703010412921,0 -84.50454934599998,33.65747076512925,0 -84.50455166499995,33.6579847971292,0 -84.50455265899996,33.6582051041292,0 -84.50455531199998,33.65879261512918,0 -84.50455830099997,33.65945360912923,0 -84.50456162599994,33.66018809812917,0 -84.50456428899997,33.6607757301292,0 -84.50456528899997,33.66099610112919,0 -84.50456762199997,33.66151032012917,0 -84.50456995799999,33.66202456712917,0 -84.50457196199994,33.66246537312918,0 -84.50457396699994,33.66290619812919,0 -84.50457530499995,33.66320009312916,0 -84.50457664399994,33.66349399712914,0 -84.50466734999998,33.66400827012914,0 -84.50484507799996,33.66422855512916,0 -84.50520122899997,33.66481611512913,0 -84.50555639699996,33.66518323812912,0 -84.50600029399999,33.66562378912911,0 -84.50573586299998,33.66577102112914,0 -84.50538305999999,33.66591833412914,0 -84.50529502599994,33.66599191012911,0 -84.50494289199997,33.66628622112912,0 -84.50494356799999,33.66643322012909,0 -84.49212942199995,33.66615007212911,0 -84.49065478499995,33.67357698012902,0 -84.48650425599999,33.67475689912898,0 -84.48496458999995,33.68999768012885,0 -84.48090324699996,33.69287438812877,0 -84.47665775399997,33.69376144112875,0 -84.47657984699998,33.69744802512875,0 -84.46693228999999,33.69811693712871,0 -84.45993927299997,33.6982678381287,0 -84.45516122399994,33.69974513312872,0 -84.44958324999999,33.69908363312868,0 -84.44905811199999,33.7051341081286,0 -84.44277059999996,33.70565318812859,0 -84.44241446199999,33.70211096112867,0 -84.43807565799995,33.70100579912869,0 -84.43648183499994,33.69945722112869,0 -84.43001950099995,33.69916418312869,0 -84.42869231999998,33.69746829212872,0 -84.41966441299996,33.69665943112873,0 -84.41532764999994,33.69629167012872,0 -84.41541946699994,33.69378502712875,0 -84.41719224499997,33.69142617312882,0 -84.41658172099994,33.68413370312888,0 -84.41631989599995,33.68126256012891,0 -84.41508528599996,33.67868683312899,0 -84.41729759099996,33.67684697412898,0 -84.41774337599998,33.67338965712904,0 -84.39962521199999,33.67324424312903,0 -84.39724583099996,33.67030282612906,0 -84.39444773399998,33.65869293612923,0 -84.39410760099997,33.65355378512925,0 -84.39252563499997,33.65083828112932,0 -84.39006197699996,33.64797659512934,0 -84.35766386699999,33.64789240612933,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</MultiGeometry>
+	</Placemark>
+</Document>
+</kml>
