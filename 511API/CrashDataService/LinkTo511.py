@@ -18,6 +18,14 @@ if gdf.crs is None:
     # Set the CRS (replace 'EPSG:4326' with the appropriate EPSG code for your data)
     gdf = gdf.set_crs('EPSG:4326')
 
+
+def add_names():
+    gdf['name'] = ''
+    for index, row in gdf.iterrows():
+        gdf.at[index, 'name'] = f"Region {index + 1}"
+
+
+add_names()
 # Set the SHAPE_RESTORE_SHX config option to YES
 os.environ['SHAPE_RESTORE_SHX'] = 'YES'
 
@@ -52,14 +60,36 @@ points = gpd.GeoDataFrame(data,
 points_within_regions = gpd.sjoin(points, gdf, how="left")
 
 for index, row in points_within_regions.iterrows():
-    print(f"Incident {index}:")
-    print(f"  Location: ({row['Latitude']}, {row['Longitude']})")
-    if pd.isna(row['index_right']):
-        print("  Region: None (point is not within any region)")
+    # Check if 'Subtype' exists and filter out non-crash subtypes
+    if 'Subtype' in row and pd.notna(row['Subtype']) and row['Subtype'] != "crash":
+        continue
+    
+    # Ensure 'index_right' exists and handle missing values
+    if 'index_right' in row and pd.isna(row['index_right']):
+        region = 'None (point is not within any region)'
     else:
-        # print(f"  Region: {row['region_column_name']}") Replace 'region_column_name' with the actual column name for regions
-        print(row)
+        region = row.get('name', 'N/A')  # Replace 'name' with the actual column name for regions
+    
+    print(f"Incident {index}:")
+    
+    latitude = row.get('Latitude', 'N/A')
+    longitude = row.get('Longitude', 'N/A')
+    description = row.get('Description', 'N/A')
+    reported = row.get('Reported', None)
+    type = row.get('Subtype', None)
+    last_updated = row.get('LastUpdated', None)
 
-
-
-
+    print(f"  Location: ({latitude}, {longitude})")
+    print(f"  Region: {region}")
+    print(f"  Description: {description}")
+    print(f"  Type: {type}")
+    
+    if reported is not None:
+        print(f"  Reported at: {datetime.fromtimestamp(reported)}")
+    else:
+        print("  Reported at: N/A")
+    
+    if last_updated is not None:
+        print(f"  Last updated at: {datetime.fromtimestamp(last_updated)}")
+    else:
+        print("  Last updated at: N/A")

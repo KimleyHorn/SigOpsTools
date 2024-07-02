@@ -49,22 +49,34 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}",
+                "env": {
+                    "PATH": "${workspaceFolder}/devTools/func:${env:PATH}"
+                }
+            },
+            "windows": {
+                "options": {
+                    "env": {
+                        "PATH": "${workspaceFolder}/devTools/func;${env:PATH}"
+                    }
+                }
             },
             "problemMatcher": {
-                "pattern": [
-                    {
-                        "regexp": "^.*$",
-                        "file": 0,
-                        "location": 1,
-                        "message": 2
-                    }
-                ],
+                "pattern": {
+                    "regexp": "^.*$",
+                    "file": 0,
+                    "location": 1,
+                    "message": 2
+                },
                 "background": {
                     "activeOnStart": true,
-                    "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "beginsPattern": "^.*(Job host stopped|signaling restart).*$",
+                    "endsPattern": "^.*(Worker process started and initialized|Host lock lease acquired by instance ID).*$"
                 }
-            }
+            },
+            "dependsOn": [
+                "Start Azurite emulator",
+                "Compile typescript"
+            ]
         },
         {
             "label": "Start Test Tool",
@@ -182,8 +194,41 @@
             "command": "npm run dev:teamsfx",
             "isBackground": true,
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PATH": "${workspaceFolder}/devTools/func:${env:PATH}"
+                }
             },
+            "windows": {
+                "options": {
+                    "env": {
+                        "PATH": "${workspaceFolder}/devTools/func;${env:PATH}"
+                    }
+                }
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$",
+                    "file": 0,
+                    "location": 1,
+                    "message": 2
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*(Job host stopped|signaling restart).*$",
+                    "endsPattern": "^.*(Worker process started and initialized|Host lock lease acquired by instance ID).*$"
+                }
+            },
+            "dependsOn": [
+                "Start Azurite emulator",
+                "Compile typescript"
+            ]
+        },
+        {
+            "label": "Start Azurite emulator",
+            "type": "shell",
+            "command": "npm run prepare-storage:teamsfx",
+            "isBackground": true,
             "problemMatcher": {
                 "pattern": [
                     {
@@ -195,9 +240,28 @@
                 ],
                 "background": {
                     "activeOnStart": true,
-                    "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "beginsPattern": "Azurite",
+                    "endsPattern": "successfully listening"
                 }
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Compile typescript",
+            "type": "shell",
+            "command": "npm run watch:teamsfx",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$tsc-watch",
+            "presentation": {
+                "reveal": "silent"
             }
         }
     ]

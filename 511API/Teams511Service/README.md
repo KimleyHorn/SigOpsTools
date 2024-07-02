@@ -1,70 +1,144 @@
-# Overview of the Basic Bot template
+# Overview of the Notification bot template
 
-Examples of Microsoft Teams bots in everyday use include:
+This template showcases an app that send a message to Teams with Adaptive Cards triggered by a HTTP post request or timer schedule. You can further extend the template to consume, transform and post events to individual, chat or channel in Teams.
 
-- Bots that notify about build failures.
-- Bots that provide information about the weather or bus schedules.
-- Bots that provide travel information.
+The app template is built using the TeamsFx SDK, which provides a simple set of functions over the Microsoft Bot Framework to implement this scenario.
 
-A bot interaction can be a quick question and answer, or it can be a complex conversation. Being a cloud application, a bot can provide valuable and secure access to cloud services and corporate resources.
+## Get Started with the Notification bot
 
-## Get started with the Basic Bot template
-
+>
 > **Prerequisites**
 >
-> To run the Basic Bot template in your local dev machine, you will need:
+> To run the notification bot template in your local dev machine, you will need:
 >
 > - [Node.js](https://nodejs.org/), supported versions: 16, 18
-> - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [Teams Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
-
+> - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [TeamsFx CLI](https://aka.ms/teamsfx-toolkit-cli)
+>
+> **Note**
+>
+> Your app can be installed into a team, or a group chat, or as personal app. See [Installation and Uninstallation](https://aka.ms/teamsfx-notification-new#customize-installation).
 > For local debugging using Teams Toolkit CLI, you need to do some extra steps described in [Set up your Teams Toolkit CLI for local debugging](https://aka.ms/teamsfx-cli-debugging).
 
 1. First, select the Teams Toolkit icon on the left in the VS Code toolbar.
 2. Press F5 to start debugging which launches your app in Teams App Test Tool using a web browser. Select `Debug in Test Tool`.
 3. The browser will pop up to open Teams App Test Tool.
-4. You will receive a welcome message from the bot, and you can send anything to the bot to get an echoed response.
+4. If you select `Timer Trigger`, wait for 30 seconds. If you select `HTTP Trigger`, send a POST request to `http://<endpoint>/api/notification` with your favorite tool (like `Postman`)
 
-**Congratulations**! You are running an application that can now interact with users in Teams App Test Tool:
+   - When your project is running locally, replace `<endpoint>` with `localhost:3978`
+   - When your project is deployed to Azure App Service, replace `<endpoint>` with the url from Azure App Service
 
-![basic bot](https://github.com/OfficeDev/TeamsFx/assets/9698542/bdf87809-7dd7-4926-bff0-4546ada25e4b)
+The bot will send an Adaptive Card to Teams App Test Tool:
+
+![Notification Message in Test Tool](https://github.com/OfficeDev/TeamsFx/assets/9698542/43ee64f4-5554-4e0b-854f-f7e20672cb25)
 
 ## What's included in the template
 
-| Folder       | Contents                                            |
+| Folder / File | Contents |
 | - | - |
-| `.vscode`    | VSCode files for debugging                          |
-| `appPackage` | Templates for the Teams application manifest        |
-| `env`        | Environment files                                   |
-| `infra`      | Templates for provisioning Azure resources          |
+| `teamsapp.yml` | Main project file describes your application configuration and defines the set of actions to run in each lifecycle stages |
+| `teamsapp.local.yml`| This overrides `teamsapp.yml` with actions that enable local execution and debugging |
+| `teamsapp.testtool.yml`| This overrides `teamsapp.yml` with actions that enable local execution and debugging in Teams App Test Tool |
+| `.vscode/` | VSCode files for local debug |
+| `src/` | The source code for the notification Teams application |
+| `appPackage/` | Templates for the Teams application manifest |
+| `infra/` | Templates for provisioning Azure resources |
 
 The following files can be customized and demonstrate an example implementation to get you started.
 
-| File                                 | Contents                                           |
+| File | Contents |
 | - | - |
-|`teamsBot.js`| Handles business logics for the Basic Bot.|
-|`index.js`|`index.js` is used to setup and configure the Basic Bot.|
+| `*Trigger/function.json` | Azure Function bindings for the notification trigger |
+| `src/*Trigger.ts` | Notification trigger implementation |
+| `src/teamsBot.ts`| An empty teams activity handler for bot customization |
+| `src/adaptiveCards/notification-default.json` | A generated Adaptive Card that is sent to Teams |
+| `src/cardModels.ts` | The default Adaptive Card data model |
 
-The following are Teams Toolkit specific project files. You can [visit a complete guide on Github](https://github.com/OfficeDev/TeamsFx/wiki/Teams-Toolkit-Visual-Studio-Code-v5-Guide#overview) to understand how Teams Toolkit works.
+The following files implement the core notification on the Bot Framework. You generally will not need to customize these files.
 
-| File                                 | Contents                                           |
+| File / Folder | Contents |
 | - | - |
-|`teamsapp.yml`|This is the main Teams Toolkit project file. The project file defines two primary things:  Properties and configuration Stage definitions. |
-|`teamsapp.local.yml`|This overrides `teamsapp.yml` with actions that enable local execution and debugging.|
-|`teamsapp.testtool.yml`| This overrides `teamsapp.yml` with actions that enable local execution and debugging in Teams App Test Tool.|
+| `src/internal/initialize.ts` | Application initialization |
+| `messageHandler/` | Azure Function bindings to implement Bot protocol |
+| `src/internal/messageHandler.ts`<br/>`src/internal/responseWrapper.ts` | Bot protocol implementation |
 
-## Extend the Basic Bot template
+The following files are project-related files. You generally will not need to customize these files.
 
-Following documentation will help you to extend the Basic Bot template.
+| File / Folder | Contents |
+| - | - |
+| `.funcignore` | Azure Functions ignore file to exclude local files |
+| `.gitignore` | Git ignore file |
+| `host.json` | Azure Functions host file |
+| `local.settings.json` | Azure Functions settings for local debugging |
+| `package.json` | NPM package file |
 
-- [Add or manage the environment](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-multi-env)
-- [Create multi-capability app](https://learn.microsoft.com/microsoftteams/platform/toolkit/add-capability)
-- [Add single sign on to your app](https://learn.microsoft.com/microsoftteams/platform/toolkit/add-single-sign-on)
-- [Access data in Microsoft Graph](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-sdk#microsoft-graph-scenarios)
-- [Use an existing Microsoft Entra application](https://learn.microsoft.com/microsoftteams/platform/toolkit/use-existing-aad-app)
-- [Customize the Teams app manifest](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-preview-and-customize-app-manifest)
-- Host your app in Azure by [provision cloud resources](https://learn.microsoft.com/microsoftteams/platform/toolkit/provision) and [deploy the code to cloud](https://learn.microsoft.com/microsoftteams/platform/toolkit/deploy)
-- [Collaborate on app development](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-collaboration)
-- [Set up the CI/CD pipeline](https://learn.microsoft.com/microsoftteams/platform/toolkit/use-cicd-template)
-- [Publish the app to your organization or the Microsoft Teams app store](https://learn.microsoft.com/microsoftteams/platform/toolkit/publish)
-- [Develop with Teams Toolkit CLI](https://aka.ms/teams-toolkit-cli/debug)
-- [Preview the app on mobile clients](https://github.com/OfficeDev/TeamsFx/wiki/Run-and-debug-your-Teams-application-on-iOS-or-Android-client)
+## Extend the notification bot template
+
+There are few customizations you can make to extend the template to fit your business requirements.
+
+1. [Step 1: Customize the trigger point from event source](#step-1-customize-the-trigger-point-from-event-source)
+2. [Step 2: Customize the notification content](#step-2-customize-the-notification-content)
+3. [Step 3: Customize where notifications are sent](#step-3-customize-where-notifications-are-sent)
+
+### Step 1: Customize the trigger point from event source
+
+If you selected `timer` trigger, the default Azure Function timer trigger (`src/timerTrigger.ts`) implementation simply sends a hard-coded Adaptive Card every 30 seconds. You can edit the file `*Trigger/function.json` to customize the `schedule` property. Refer to the [Azure Function documentation](https://docs.microsoft.com/azure/azure-functions/functions-bindings-timer?tabs=in-process&pivots=programming-language-javascript#ncrontab-expressions) for more details.
+
+If you selected `http` trigger, when this trigger is hit (via a HTTP request), the default implementation sends a hard-coded Adaptive Card to Teams. You can change this behavior by customizing `src/*Trigger.ts`. A typical implementation might make an API call to retrieve some events and/or data, and then send an Adaptive Card as appropriate.
+
+You can also add any Azure Function trigger. For example:
+
+- You can use an `Event Hub` trigger to send notifications when an event is pushed to Azure Event Hub.
+- You can use a `Cosmos DB` trigger to send notifications when a Cosmos document has been created or updated.
+
+See Azure Functions [supported triggers](https://docs.microsoft.com/azure/azure-functions/functions-triggers-bindings?tabs=javascript#supported-bindings).
+
+## Step 2: Customize the notification content
+
+`src/adaptiveCards/notification-default.json` defines the default Adaptive Card. You can use the [Adaptive Card Designer](https://adaptivecards.io/designer/) to help visually design your Adaptive Card UI.
+
+`src/cardModels.ts` defines a data structure that is used to fill data for the Adaptive Card. The binding between the model and the Adaptive Card is done by name matching (for example,`CardData.title` maps to `${title}` in the Adaptive Card). You can add, edit, or remove properties and their bindings to customize the Adaptive Card to your needs.
+
+You can also add new cards if needed. Follow this [sample](https://aka.ms/teamsfx-adaptive-card-sample-new) to see how to build different types of adaptive cards with a list or a table of dynamic contents using `ColumnSet` and `FactSet`.
+
+### Step 3: Customize where notifications are sent
+
+Notifications can be sent to where the bot is installed:
+
+- [Send notifications to a channel](https://aka.ms/teamsfx-notification-new#send-notifications-to-a-channel)
+- [Send notifications to a group chat](https://aka.ms/teamsfx-notification-new#send-notifications-to-a-group-chat)
+- [Send notifications to a personal chat](https://aka.ms/teamsfx-notification-new#send-notifications-to-a-personal-chat)
+
+You can also send the notifications to a specific receiver:
+
+- [Send notifications to a specific channel](https://aka.ms/teamsfx-notification-new#send-notifications-to-a-specific-channel)
+- [Send notifications to a specific person](https://aka.ms/teamsfx-notification-new#send-notifications-to-a-specific-person)
+
+Congratulations, you've just created your own notification! To learn more about extending the notification bot template, [visit the documentation on Github](https://aka.ms/teamsfx-notification-new). You can find more scenarios like:
+
+- [Customize storage](https://aka.ms/teamsfx-notification-new#customize-storage)
+- [Customize adapter](https://aka.ms/teamsfx-notification-new#customize-adapter)
+- [Customize the way to initialize the bot](https://aka.ms/teamsfx-notification-new#customize-initialization)
+- [Add authentication for your notification API](https://aka.ms/teamsfx-notification-new#add-authentication-for-your-notification-api)
+- [Connect to existing APIs](https://aka.ms/teamsfx-notification-new#connect-to-existing-api)
+- [Frequently asked questions](https://aka.ms/teamsfx-notification-new#frequently-asked-questions)
+
+## Extend notification bot with other bot scenarios
+
+Notification bot is compatible with other bot scenarios like command bot and workflow bot.
+
+### Add command to your application
+
+The command and response feature adds the ability for your application to "listen" to commands sent to it via a Teams message and respond to commands with Adaptive Cards. Follow the [steps here](https://aka.ms/teamsfx-command-new#How-to-add-more-command-and-response) to add the command response feature to your workflow bot. Refer [the command bot document](https://aka.ms/teamsfx-command-new) for more information.
+
+### Add workflow to your notification bot
+
+Adaptive cards can be updated on user action to allow user progress through a series of cards that require user input. Developers can define actions and use a bot to return an Adaptive Cards in response to user action. This can be chained into sequential workflows. Follow the [steps here](https://aka.ms/teamsfx-workflow-new#add-more-card-actions) to add workflow feature to your command bot. Refer [the workflow document](https://aka.ms/teamsfx-workflow-new) for more information.
+
+## Additional information and references
+
+- [Manage multiple environments](https://docs.microsoft.com/microsoftteams/platform/toolkit/teamsfx-multi-env)
+- [Collaborate with others](https://docs.microsoft.com/microsoftteams/platform/toolkit/teamsfx-collaboration)
+- [Teams Toolkit Documentations](https://docs.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals)
+- [Teams Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
+- [TeamsFx SDK](https://docs.microsoft.com/microsoftteams/platform/toolkit/teamsfx-sdk)
+- [Teams Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)

@@ -16,7 +16,7 @@
     },
     "name": {
         "short": "Teams511Service${{APP_NAME_SUFFIX}}",
-        "full": "full name for Teams511Service"
+        "full": "ful name for Teams511Service"
     },
     "description": {
         "short": "short description for Teams511Service",

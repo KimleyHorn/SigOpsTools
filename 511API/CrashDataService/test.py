@@ -1,14 +1,13 @@
 import geopandas as gpd
 
 # Load the GeoJSON file
-geojson_path = 'C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\511API\\CrashDataService\\Polygons.shp'
-gdf = gpd.read_file(geojson_path)
+shapefile_path = 'C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\511API\\CrashDataService\\Polygons.shp'
 
-# Print the first few rows of the GeoDataFrame to inspect the data
-print(gdf.head())
+# Path to your shapefile
+# shapefile_path = 'path/to/your/shapefile.shp'
 
-# Print the column names to see what attributes are available
-print("Columns in the GeoJSON file:", gdf.columns)
+# Load the shapefile
+gdf = gpd.read_file(shapefile_path)
 
-# Print the CRS of the GeoJSON file
-print("CRS of the GeoJSON file:", gdf.crs)
+# Print the attribute table
+print(gdf.columns)
