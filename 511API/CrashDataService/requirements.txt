@@ -1,0 +1,7 @@
+requests
+configparser
+geopandas
+pandas
+shapely
+fiona
+azure-functions
