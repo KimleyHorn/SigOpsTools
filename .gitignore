@@ -11,3 +11,4 @@
 config.ini
 /Cycle Length Tools/AWSAccess/AWSAccess/DAL/App.config
 /.vs/
+*.config

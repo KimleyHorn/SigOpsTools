@@ -2,6 +2,9 @@
 
 namespace SigOpsTools.API
 {
+    /// <summary>
+    /// The incident class that will drive all of the 
+    /// </summary>
     public class Incident
     {
 
@@ -120,6 +123,10 @@ namespace SigOpsTools.API
         }
     }
 
+
+/// <summary>
+/// 
+/// </summary>
     public class IncidentLocation
     {
         private double _lat;
