@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SigOpsTools.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85812a72b861299ebbe78183bc58b62fec2254e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0ee9c4df47fc3c667cb4d8c742336c9022b0e94")]
 [assembly: System.Reflection.AssemblyProductAttribute("SigOpsTools.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SigOpsTools.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
