@@ -108,11 +108,12 @@ def insert_records_to_db(records, db_config):
                             SET LastUpdated = %s, Description = %s, LanesAffected = %s, Detours = %s
                             WHERE ID = %s
                         """, (record.last_updated, record.description, record.lanesAffected, record.detours, record.ID))
-                        logging.info(f"Record {record.ID} updated successfully.")
+                        # logging.info(f"Record {record.ID} updated successfully.")
                     except mysql.connector.Error as update_err:
                         logging.error(f"Error updating record {record.ID}: {update_err}")
                 else:
-                    logging.info(f"ID {record.ID} already exists and is up-to-date. Skipping update.")
+                    # logging.info(f"ID {record.ID} already exists and is up-to-date. Skipping update.")
+                    continue
                 continue
 
             try:
@@ -121,7 +122,7 @@ def insert_records_to_db(records, db_config):
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (record.ID, record.roadway_name, record.region, record.reported, record.last_updated, record.description,
                 record.latitude, record.longitude, record.travel_dir, record.event_type, record.subtype, record.lanesAffected, record.detours))
-                logging.info(f"Record {record.ID} inserted successfully.")
+                # logging.info(f"Record {record.ID} inserted successfully.")
             except mysql.connector.Error as insert_err:
                 logging.error(f"Error inserting record {record.ID}: {insert_err}")
 
@@ -196,7 +197,7 @@ def main(mytimer: func.TimerRequest) -> None:
         else:
             region = row.get('name', 'N/A')
 
-        logging.info(f"Incident {index}:")
+        # logging.info(f"Incident {index}:")
 
         ID = row.get('ID', 'N/A')
         roadway_name = row.get('RoadwayName', 'N/A')
@@ -215,7 +216,7 @@ def main(mytimer: func.TimerRequest) -> None:
         # use row.get to create a new incident object
         inc = incident(ID, roadway_name, region, reported, last_updated, description, latitude, longitude, travel_dir, event_type, subtype, lanesAffected, detours)
         incident_log.append(inc)
-        log_info(inc)
+        # log_info(inc)
     insert_records_to_db(incident_log, db_config)
 
 if __name__ == "__main__":
