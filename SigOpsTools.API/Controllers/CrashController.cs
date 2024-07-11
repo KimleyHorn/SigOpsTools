@@ -23,6 +23,21 @@ namespace SigOpsTools.API.Controllers
             _crashDataAccessLayer = new CrashDataAccessLayer();
         }
 
+        [HttpGet("GetAll",Name = "GetAllCrashes")]
+        public async Task<IEnumerable<Incident>> Get()
+        {
+            try
+            {
+                var incidents = await _crashDataAccessLayer.GetAllIncidentsAsync();
+                return incidents;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while getting all incidents.");
+                throw;
+            }
+        }
+
         [HttpGet("GetById", Name = "GetCrashById")]
         public async Task<ActionResult<Incident>> GetById(string id)
         {
@@ -33,7 +48,7 @@ namespace SigOpsTools.API.Controllers
                 {
                     return NotFound();
                 }
-                return incident;
+                return Ok(incident);
             }
             catch (Exception e)
             {
@@ -134,7 +149,7 @@ namespace SigOpsTools.API.Controllers
                 }
 
                 _incidentRepository.AddIncidentAsync(incident);
-                return CreatedAtRoute("GetCrashById", new { id = incident.Id }, incident);
+                return CreatedAtRoute("GetCrashById", new { id = incident.ID }, incident);
             }
             catch (Exception e)
             {

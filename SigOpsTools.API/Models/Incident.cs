@@ -9,82 +9,59 @@ namespace SigOpsTools.API.Models
     {
         public Incident()
         {
-            Id = string.Empty;
+            ID = string.Empty;
             RoadwayName = string.Empty;
             DateReported = DateTime.MinValue;
-            DateUpdated = DateTime.MinValue;
+            LastUpdated = DateTime.MinValue;
             Description = string.Empty;
-            Location = new IncidentLocation
-            {
-                Lat = 0.0,
-                Lon = 0.0
-            };
+            Latitude = 0.0;
+            Longitude = 0.0;
             DirectionOfTravel = string.Empty;
             EventType = string.Empty;
-            EventSubtype = string.Empty;
+            Subtype = string.Empty;
             Detours = string.Empty;
             LanesAffected = string.Empty;
             Region = string.Empty;
 
         }
 
-        public Incident(string id, string roadwayName, DateTime dateReported, DateTime dateUpdated, string description, IncidentLocation location, string directionOfTravel, string eventType, string eventSubtype, string detours, string lanesAffected, string region)
+
+        public Incident(string id = "", string roadwayName = "", DateTime dateReported = default, DateTime lastUpdated = default, string description = "", double lat = 0.0, double lon = 0.0, string directionOfTravel = "", string eventType = "", string subtype = "", string detours = "", string lanesAffected = "", string region = "")
         {
-            Id = id;
+            ID = id;
             RoadwayName = roadwayName;
             DateReported = dateReported;
-            DateUpdated = dateUpdated;
+            LastUpdated = lastUpdated;
             Description = description;
-            Location = new IncidentLocation
-            {
-                Lat = location.Lat,
-                Lon = location.Lon
-            };
+            Latitude = lat;
+            Longitude = lon;
             DirectionOfTravel = directionOfTravel;
             EventType = eventType;
-            EventSubtype = eventSubtype;
+            Subtype = subtype;
             Detours = detours;
             LanesAffected = lanesAffected;
             Region = region;
         }
 
-        public Incident(string id = "", string roadwayName = "", DateTime dateReported = default, DateTime dateUpdated = default, string description = "", double lat = 0.0, double lon = 0.0, string directionOfTravel = "", string eventType = "", string eventSubtype = "", string detours = "", string lanesAffected = "", string region = "")
-        {
-            Id = id;
-            RoadwayName = roadwayName;
-            DateReported = dateReported;
-            DateUpdated = dateUpdated;
-            Description = description;
-            Location = new IncidentLocation
-            {
-                Lat = lat,
-                Lon = lon
-            };
-            DirectionOfTravel = directionOfTravel;
-            EventType = eventType;
-            EventSubtype = eventSubtype;
-            Detours = detours;
-            LanesAffected = lanesAffected;
-            Region = region;
-        }
-
-        public string Id { get; set; }
+        public string ID { get; set; }
 
         public string RoadwayName { get; set; }
 
         public DateTime DateReported { get; set; }
 
-        public DateTime DateUpdated { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         public string Description { get; set; }
 
-        public IncidentLocation Location { get; set; }
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
 
         public string DirectionOfTravel { get; set; }
 
         public string EventType { get; set; }
 
-        public string EventSubtype { get; set; }
+        public string Subtype { get; set; }
 
         public string Detours { get; set; }
 
@@ -95,22 +72,7 @@ namespace SigOpsTools.API.Models
         public override string ToString()
         {
             return
-                $"Id: {Id}, RoadwayName: {RoadwayName}, DateReported: {DateReported}, DateUpdated: {DateUpdated}, Description: {Description}, Location: {Location}, DirectionOfTravel: {DirectionOfTravel}, EventType: {EventType}, EventSubtype: {EventSubtype}, Detours: {Detours}, LanesAffected: {LanesAffected}, Region: {Region}";
+                $"Id: {ID}, RoadwayName: {RoadwayName}, DateReported: {DateReported}, DateUpdated: {LastUpdated}, Description: {Description}, Location: {Latitude} {Longitude}, DirectionOfTravel: {DirectionOfTravel}, EventType: {EventType}, EventSubtype: {Subtype}, Detours: {Detours}, LanesAffected: {LanesAffected}, Region: {Region}";
         }
     }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class IncidentLocation
-    {
-        //private string _roadway; TODO: Add roadway name and figure out a way to djikstra's algorithm to find all roads affected in the roadway direction
-        public double Lat { get; set; }
-
-        public double Lon { get; set; }
-    }
-
-
-
 }

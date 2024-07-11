@@ -43,15 +43,23 @@ namespace SigOpsTools.API
                 var whereClauses = new List<string>();
 
                 var properties = typeof(Incident).GetProperties();
-                foreach (var prop in properties)
-                {
-                    var value = prop.GetValue(i);
-                    if (value == null || value is string str && string.IsNullOrEmpty(str)) continue;
-                    whereClauses.Add($"{prop.Name} = @{prop.Name}");
-                    cmd.Parameters.AddWithValue($"@{prop.Name}", value);
-                }
 
-                cmd.CommandText = "SELECT * FROM incidents";
+                if (i != null)
+                {
+                    foreach (var prop in properties)
+                    {
+                        var value = prop.GetValue(i);
+                        if (value == null ||
+                            value is string str && string.IsNullOrEmpty(str) ||
+                            value is double and 0 ||
+                            value is DateTime d && d == DateTime.MinValue) continue;
+                        whereClauses.Add($"{prop.Name} = @{prop.Name}");
+                        cmd.Parameters.AddWithValue($"@{prop.Name}", value);
+                    }
+
+
+                }
+                cmd.CommandText = $"SELECT * FROM {MySqlDbName}.incidents";
                 if (whereClauses.Any())
                 {
                     cmd.CommandText += " WHERE " + string.Join(" AND ", whereClauses);
@@ -81,9 +89,33 @@ namespace SigOpsTools.API
             }
         }
 
+        private async Task<IEnumerable<Incident>> GetByRange(string dateColumn, List<DateTime> dates)
+        {
+            var incidents = new List<Incident>();
+            if (MySqlConnection.State == ConnectionState.Closed)
+                await MySqlConnection.OpenAsync();
+
+            var inClause = string.Join(",", dates);
+
+            var cmd = MySqlConnection.CreateCommand();
+            if (dateColumn != "DateReported" || dateColumn != "LastUpdated") return incidents;
+
+            cmd.CommandText = $"SELECT * FROM {MySqlDbName}.incidents WHERE {dateColumn} IN ({inClause})";
+            return incidents;
+        }
+
         public async Task<IEnumerable<Incident>> GetAllIncidentsAsync()
         {
-            return await GetByFilter();
+            try
+            {
+                return await GetByFilter();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public async Task<Incident> GetIncidentByIdAsync(string id)
@@ -92,7 +124,7 @@ namespace SigOpsTools.API
             {
                 var i = await GetByFilter(new Incident
                 {
-                    Id = id
+                    ID = id
                 });
 
                 return i.FirstOrDefault();
@@ -106,9 +138,20 @@ namespace SigOpsTools.API
             
         }
 
-        public Task<IEnumerable<Incident>> GetIncidentsByRoadwayNameAsync(string roadwayName)
+        public async Task<IEnumerable<Incident>> GetIncidentsByRoadwayNameAsync(string roadwayName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await GetByFilter(new Incident
+                {
+                    RoadwayName = roadwayName
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public Task<IEnumerable<Incident>> GetIncidentsByDateRangeAsync(DateTime startDate, DateTime endDate)
@@ -116,14 +159,36 @@ namespace SigOpsTools.API
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Incident>> GetIncidentsBySubtypeAsync(string subtype)
+        public async Task<IEnumerable<Incident>> GetIncidentsBySubtypeAsync(string subtype)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await GetByFilter(new Incident
+                {
+                    Subtype = subtype
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        public Task<IEnumerable<Incident>> GetIncidentsByLanesAffectedAsync(string lanesAffected)
+        public async Task<IEnumerable<Incident>> GetIncidentsByLanesAffectedAsync(string lanesAffected)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await GetByFilter(new Incident
+                {
+                    LanesAffected = lanesAffected
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public Task RecordCrashUpdateAsync(Incident incident)
