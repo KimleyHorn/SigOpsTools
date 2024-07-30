@@ -1,5 +1,5 @@
 import { TeamsActivityHandler } from "botbuilder";
-import * as restify from 'restify'
+
 // An empty teams activity handler.
 // You can add your customization code here to extend your bot logic if needed.
 export class TeamsBot extends TeamsActivityHandler {

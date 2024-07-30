@@ -3,6 +3,9 @@ import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 import notificationTemplate from "./adaptiveCards/notification-default.json";
 import { CardData } from "./cardModels";
 import { notificationApp } from "./internal/initialize";
+import { TeamsActivityHandler, TurnContext } from 'botbuilder';
+import { NotificationTargetType } from '@microsoft/teamsfx';
+
 
 // An Azure Function HTTP trigger.
 //
@@ -40,6 +43,36 @@ const httpTrigger: AzureFunction = async function (
           notificationUrl: "https://aka.ms/teamsfx-notification-new",
         })
       );
+      if (target.type === NotificationTargetType.Group) {
+        // You can send the Adaptive Card to the Group Chat
+        await target.sendAdaptiveCard(
+          AdaptiveCards.declare<CardData>(notificationTemplate).render({
+          title: "New Event Occurred!",
+          appName: "Contoso App Notification",
+          description: `This is a sample http-triggered notification to ${target.type}`,
+          notificationUrl: "https://aka.ms/teamsfx-notification-new",
+        }));
+  
+        // Or you can list all members in the Group Chat and send the Adaptive Card to each Team member
+        const pageSize = 100;
+        let continuationToken: string | undefined = undefined;
+        do {
+          const pagedData = await target.getPagedMembers(pageSize, continuationToken);
+          const members = pagedData.data;
+          continuationToken = pagedData.continuationToken;
+
+          for (const member of members) {
+            // You can even filter the members and only send the Adaptive Card to members that fit a criteria
+            await member.sendAdaptiveCard(
+              AdaptiveCards.declare<CardData>(notificationTemplate).render({
+              title: "New Event Occurred!",
+              appName: "Contoso App Notification",
+              description: `This is a sample http-triggered notification to ${target.type}`,
+              notificationUrl: "https://aka.ms/teamsfx-notification-new",
+            }));
+          }
+        } while (continuationToken);
+      }
 
       // Note - you can filter the installations if you don't want to send the event to every installation.
 

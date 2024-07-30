@@ -2,8 +2,11 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using MySqlConnector;
-using System.Configuration;
+
 using System.Data;
+using System.Net;
+using System.Net.Mail;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using SigOpsTools.API.Models;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
@@ -15,11 +18,12 @@ namespace SigOpsTools.API
         internal static readonly string? MySqlConnString = ConfigurationManager.AppSettings["CONN_STRING"];
         internal static MySqlConnection MySqlConnection;
 
-        static CrashDataAccessLayer()
+        public CrashDataAccessLayer()
         {
             try
             {
                 MySqlConnection = new MySqlConnection(MySqlConnString);
+
             }
             catch (Exception ex)
             {
@@ -191,9 +195,21 @@ namespace SigOpsTools.API
             }
         }
 
-        public Task RecordCrashUpdateAsync(Incident incident)
+        public Task<IEnumerable<Incident>> RecordCrashUpdateAsync(Incident incident)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return GetByFilter(new Incident
+                {
+                    DateReported = DateTime.Now
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         public Task AddIncidentAsync(Incident incident)
@@ -208,6 +224,12 @@ namespace SigOpsTools.API
 
         public Task DeleteIncidentAsync(int id)
         {
+            throw new NotImplementedException();
+        }
+
+        public string CreateEmail(IEnumerable<Incident> incident)
+        {
+            //return 
             throw new NotImplementedException();
         }
     }

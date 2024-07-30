@@ -13,3 +13,7 @@ config.ini
 /.vs/
 *.config
 511API/CrashDataService/test.py
+
+.python_packages
+__pycache__
+.venv

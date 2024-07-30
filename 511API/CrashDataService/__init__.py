@@ -1,14 +1,13 @@
 import datetime
 import logging
 import requests
-import configparser
 import os
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
 import azure.functions as func
 import mysql.connector
-
+import configparser
 
 class incident():
     def __init__(self, id, roadway_name, region, reported, last_updated, description, latitude, longitude, travel_dir, event_type, subtype, lanesAffected, detours):
@@ -44,6 +43,24 @@ def updated(cursor, table_name, record_id, new_last_updated):
         return new_last_updated > existing_last_updated
     return False
 
+def get_value(row, key, default=None):
+    return row.get(key, default)
+
+def load_config(filename):
+    parser = configparser.ConfigParser()
+    parser.read(filename)
+    return parser
+
+
+config_filename = 'C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\511API\\CrashDataService\\config.ini'
+config_parsed = load_config(config_filename)
+
+db_config = {
+    'host': config_parsed['Database']['host'],
+    'user': config_parsed['Database']['user'],
+    'password': config_parsed['Database']['password'],
+    'database': config_parsed['Database']['database']
+}
 
 def log_info(inc):
     utc_timestamp = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
@@ -67,28 +84,22 @@ def log_info(inc):
     # logging.info(f"  Detours: {detours}")
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 
-def load_config(filename):
-    parser = configparser.ConfigParser()
-    parser.read(filename)
-    return parser
+def checkDBConfig():
+    if 'Database' not in config_parsed or any(key not in config_parsed['Database'] for key in ['host', 'user', 'password', 'database']):
+        logging.error("Configuration file is missing the 'Database' section or one of the required keys.")
+        return False
+    return True
 
-def get_value(row, key, default=None):
-    return row.get(key, default)
+def send_post_request(data):
+    url = config_parsed['API']['url']
+    headers = {'Content-Type': 'application/json'}
+    
+    # Convert the incident object to a dictionary if it is an instance of the incident class
+    if isinstance(data, incident):
+        data = data.to_dict()
 
-config_filename = 'C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\511API\\CrashDataService\\config.ini'
-config_parsed = load_config(config_filename)
-
-# Check for database configuration
-if 'Database' not in config_parsed or any(key not in config_parsed['Database'] for key in ['host', 'user', 'password', 'database']):
-    logging.error("Configuration file is missing the 'Database' section or one of the required keys.")
-    exit(1)
-
-db_config = {
-    'host': config_parsed['Database']['host'],
-    'user': config_parsed['Database']['user'],
-    'password': config_parsed['Database']['password'],
-    'database': config_parsed['Database']['database']
-}
+    response = requests.post(url, json=data, headers=headers)
+    return response.status_code
 
 # Function to insert records into the database
 def insert_records_to_db(records, db_config):
@@ -100,20 +111,17 @@ def insert_records_to_db(records, db_config):
 
         # Insert each record
         for record in records:
-            if id_exists(cursor, table_name, record.ID):
-                if updated(cursor, table_name, record.ID, record.last_updated):
+            if id_exists(cursor, table_name, record.ID) & updated(cursor, table_name, record.ID, record.last_updated):
                     try:
                         cursor.execute(f"""
                             UPDATE {table_name}
                             SET LastUpdated = %s, Description = %s, LanesAffected = %s, Detours = %s
                             WHERE ID = %s
                         """, (record.last_updated, record.description, record.lanesAffected, record.detours, record.ID))
-                        # logging.info(f"Record {record.ID} updated successfully.")
+                        send_post_request(record)
                     except mysql.connector.Error as update_err:
                         logging.error(f"Error updating record {record.ID}: {update_err}")
-                else:
-                    # logging.info(f"ID {record.ID} already exists and is up-to-date. Skipping update.")
-                    continue
+            else:
                 continue
 
             try:
@@ -122,7 +130,6 @@ def insert_records_to_db(records, db_config):
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (record.ID, record.roadway_name, record.region, record.reported, record.last_updated, record.description,
                 record.latitude, record.longitude, record.travel_dir, record.event_type, record.subtype, record.lanesAffected, record.detours))
-                # logging.info(f"Record {record.ID} inserted successfully.")
             except mysql.connector.Error as insert_err:
                 logging.error(f"Error inserting record {record.ID}: {insert_err}")
 
@@ -138,6 +145,8 @@ def insert_records_to_db(records, db_config):
         conn.close()
 
 def main(mytimer: func.TimerRequest) -> None:
+    if not checkDBConfig():
+        exit(1)
     if mytimer.past_due:
         logging.info('The timer is past due!')
 

@@ -14,5 +14,5 @@ print(gdf.columns)
 
 
 
-azurite --location ./AzuriteTeamsBot --blobHost 127.0.0.1 --blobPort 10000 --queuePort 10001 --tablePort 10002
-azurite --location ./Azurite511Service --blobHost 127.0.0.2 --blobPort 10000 --queuePort 10001 --tablePort 10002
+# azurite --location ./AzuriteTeamsBot --blobHost 127.0.0.1 --blobPort 10000 --queuePort 10001 --tablePort 10002
+# azurite --location ./Azurite511Service --blobHost 127.0.0.2 --blobPort 10000 --queuePort 10001 --tablePort 10002

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Include="SigOpsTools.API.csproj.user" />
+
   </ItemGroup>
 
   <ItemGroup>

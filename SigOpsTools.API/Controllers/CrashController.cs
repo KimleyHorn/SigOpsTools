@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using SigOpsTools.API.Models;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace SigOpsTools.API.Controllers
 {
@@ -15,12 +16,18 @@ namespace SigOpsTools.API.Controllers
         private readonly ILogger<CrashController> _logger;
         private readonly IIncidentRepository _incidentRepository;
         private CrashDataAccessLayer _crashDataAccessLayer;
+        private readonly IEmailSender _emailSender;
 
-        public CrashController(ILogger<CrashController> logger, IIncidentRepository incidentRepository)
+
+
+        public CrashController(ILogger<CrashController> logger, IIncidentRepository incidentRepository, IEmailSender emailSender)
         {
+            _emailSender = emailSender;
             _logger = logger;
             _incidentRepository = incidentRepository;
             _crashDataAccessLayer = new CrashDataAccessLayer();
+
+
         }
 
         [HttpGet("GetAll",Name = "GetAllCrashes")]
@@ -117,8 +124,8 @@ namespace SigOpsTools.API.Controllers
             }
         }
 
-        [HttpPost(Name = "RecordCrashUpdate")]
-        public IActionResult Post([FromBody] Incident incident)
+        [HttpPost(template: "NewCrashDetected", Name = "NewCrash")]
+        public async Task<IActionResult> Post([FromBody] Incident incident)
         {
             try
             {
@@ -127,8 +134,14 @@ namespace SigOpsTools.API.Controllers
                     return BadRequest();
                 }
 
-                _crashDataAccessLayer.RecordCrashUpdateAsync(incident);
-                return NoContent();
+                var newIncidents = await _crashDataAccessLayer.RecordCrashUpdateAsync(incident);
+                var stringIncidents = newIncidents.ToString();
+
+                var emailSender = new CustomEmailSender("smtp.office365.com", 25);
+                await emailSender.SendEmailAsync("brandon.hall@kimley-horn.com", "Test Subject", "<p>This is a test email.</p>");
+
+
+                return Ok();
             }
             catch (Exception e)
             {
