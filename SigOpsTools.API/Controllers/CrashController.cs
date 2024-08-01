@@ -16,16 +16,17 @@ namespace SigOpsTools.API.Controllers
         private readonly ILogger<CrashController> _logger;
         private readonly IIncidentRepository _incidentRepository;
         private CrashDataAccessLayer _crashDataAccessLayer;
-        private readonly IEmailSender _emailSender;
+        private EmailSender _emailSender;
 
 
 
-        public CrashController(ILogger<CrashController> logger, IIncidentRepository incidentRepository, IEmailSender emailSender)
+
+        public CrashController(ILogger<CrashController> logger, IIncidentRepository incidentRepository)
         {
-            _emailSender = emailSender;
             _logger = logger;
             _incidentRepository = incidentRepository;
             _crashDataAccessLayer = new CrashDataAccessLayer();
+            _emailSender = new EmailSender();
 
 
         }
@@ -134,19 +135,21 @@ namespace SigOpsTools.API.Controllers
                     return BadRequest();
                 }
 
-                var newIncidents = await _crashDataAccessLayer.RecordCrashUpdateAsync(incident);
-                var stringIncidents = newIncidents.ToString();
+                //var newIncidents = await _crashDataAccessLayer.RecordCrashUpdateAsync(incident);
+                EmailSender e = new EmailSender();
+                var sendList = await CrashDataAccessLayer.SendTo(incident);
+                foreach (var i in sendList)
+                {
+                    var email = await e.SendGridEmailAsync(i.Item2, incident);
+                   return email ? Ok() : NotFound();
+                }
 
-                var emailSender = new CustomEmailSender("smtp.office365.com", 25);
-                await emailSender.SendEmailAsync("brandon.hall@kimley-horn.com", "Test Subject", "<p>This is a test email.</p>");
-
-
-                return Ok();
+                return BadRequest();
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "An error occurred while recording the crash update.");
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error.");
             }
         }
 

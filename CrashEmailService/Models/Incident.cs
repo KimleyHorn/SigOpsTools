@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using static System.DateTime;
 
 namespace CrashEmailService.Models
 {
@@ -11,8 +11,8 @@ namespace CrashEmailService.Models
         {
             ID = string.Empty;
             RoadwayName = string.Empty;
-            DateReported = DateTime.MinValue;
-            LastUpdated = DateTime.MinValue;
+            DateReported = MinValue;
+            LastUpdated = MinValue;
             Description = string.Empty;
             Latitude = 0.0;
             Longitude = 0.0;

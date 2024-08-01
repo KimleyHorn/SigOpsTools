@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 using CrashEmailService.Models;
 using Microsoft.Extensions.Configuration;
-using SigOpsTools.API.Models;
 
 namespace CrashEmailService
 {
