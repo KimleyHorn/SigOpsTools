@@ -1,12 +1,5 @@
-﻿using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
-using MySqlConnector;
-
+﻿using MySqlConnector;
 using System.Data;
-using System.Net;
-using System.Net.Mail;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using SigOpsTools.API.Models;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
@@ -16,7 +9,7 @@ namespace SigOpsTools.API
     {
         internal static readonly string MySqlDbName = ConfigurationManager.AppSettings["DB_NAME"] ?? "mark1";
         internal static readonly string? MySqlConnString = ConfigurationManager.AppSettings["CONN_STRING"];
-        internal static MySqlConnection MySqlConnection;
+        internal static MySqlConnection MySqlConnection = null!;
 
         public CrashDataAccessLayer()
         {
@@ -32,6 +25,19 @@ namespace SigOpsTools.API
 
             }
 
+        }
+        static CrashDataAccessLayer()
+        {
+            try
+            {
+                MySqlConnection ??= new MySqlConnection(MySqlConnString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MySqlConnection = new MySqlConnection(null);
+
+            }
         }
 
         private static async Task<IEnumerable<Incident>> GetByFilter(Incident? i = null)
@@ -63,6 +69,7 @@ namespace SigOpsTools.API
 
 
                 }
+
                 cmd.CommandText = $"SELECT * FROM {MySqlDbName}.incidents";
                 if (whereClauses.Any())
                 {
@@ -81,6 +88,7 @@ namespace SigOpsTools.API
                             prop.SetValue(incident, value);
                         }
                     }
+
                     incidents.Add(incident);
                 }
 
@@ -90,6 +98,10 @@ namespace SigOpsTools.API
             {
                 Console.WriteLine(e);
                 return incidents;
+            }
+            finally
+            {
+                MySqlConnection.Close();
             }
         }
 
@@ -211,6 +223,103 @@ namespace SigOpsTools.API
             }
 
         }
+        public static async Task<List<(string, string)>> SendTo(Incident i)
+        {
+
+            var data = new Dictionary<(int, int), string>();
+            var sendList = new List<(string, string)>();
+
+            try
+            {
+                if (MySqlConnection.State == ConnectionState.Closed)
+                    await MySqlConnection.OpenAsync();
+
+                var cmd = MySqlConnection.CreateCommand();
+
+                // Using a parameterized query to prevent SQL injection
+                cmd.CommandText = $"SELECT * FROM {MySqlDbName}.crash_data_emails WHERE Region LIKE CONCAT('%', @Region, '%')";
+                string regionParameter;
+
+                //Determine if admin should get this email based on severity
+
+                // Determine the region parameter based on the input
+                switch (i.Region)
+                {
+                    case "None":
+                        regionParameter = "All Regions";
+                        break;
+                    case "Region 1":
+                    case "Region 2":
+                    case "Region 3":
+                    case "Region 4":
+                    case "Region 5":
+                        regionParameter = i.Region;
+                        break;
+                    default:
+                        regionParameter = "All Regions";
+                        break;
+                }
+
+                // Add the region parameter to the command
+                cmd.Parameters.AddWithValue("@Region", regionParameter);
+
+                if(i.LanesAffected == "All Lanes Blocked.")
+                {
+                    cmd.CommandText += " AND Title = 'Admin'";
+                }
+
+                await using var reader = await cmd.ExecuteReaderAsync();
+                var rowIndex = 0;
+
+                while (await reader.ReadAsync())
+                {
+                    // Iterate through each column in the current row
+                    for (var columnIndex = 0; columnIndex < reader.FieldCount; columnIndex++)
+                    {
+                        // Get the value from the current column
+                        var value = reader.GetValue(columnIndex);
+
+                        // Convert the value to a string representation (handling DBNull)
+                        var valueStr = value != DBNull.Value ? value.ToString() : null;
+
+                        // Insert the row and column index along with the value into the dictionary
+                        data[(rowIndex, columnIndex)] = valueStr;
+                    }
+
+                    // Increment the row index for the next row
+                    rowIndex++;
+                }
+                sendList = data
+                    .GroupBy(x => x.Key.Item1) // Group by the first integer
+                    .Where(g => g.Any(x => x.Key.Item2 == 0) && g.Any(x => x.Key.Item2 == 2)) // Only groups that have both 0 and 2
+                    .Select(g => (
+                        g.First(x => x.Key.Item2 == 0).Value, // Get the value where second int is 0
+                        g.First(x => x.Key.Item2 == 2).Value  // Get the value where second int is 2
+                    ))
+                    .ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                // Ensure the connection is closed
+                if (MySqlConnection.State == ConnectionState.Open)
+                    await MySqlConnection.CloseAsync();
+            }
+
+            //In the crash_email_service table get the email address of the people in the correct region
+
+
+            //Switch case for region to determine who to send the email to
+            //Switch case for severity to determine who to send the email to
+
+            return sendList;
+        }
 
         public Task AddIncidentAsync(Incident incident)
         {
@@ -227,10 +336,7 @@ namespace SigOpsTools.API
             throw new NotImplementedException();
         }
 
-        public string CreateEmail(IEnumerable<Incident> incident)
-        {
-            //return 
-            throw new NotImplementedException();
-        }
+
+
     }
 }
