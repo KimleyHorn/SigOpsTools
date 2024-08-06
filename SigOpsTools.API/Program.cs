@@ -6,32 +6,6 @@ using SigOpsTools.API;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 var builder = WebApplication.CreateBuilder(args);
-void ConfigureServices(IServiceCollection services)
-{
-    services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            // Configure token validation parameters
-        };
-    });
-
-    services.AddAuthorization(options =>
-    {
-        options.AddPolicy("MyPolicy", policy =>
-        {
-            policy.RequireAuthenticatedUser();
-        });
-    });
-
-    services.AddControllers();
-    services.AddSwaggerGen();
-}
 
 
 // Add services to the container.

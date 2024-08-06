@@ -126,7 +126,7 @@ namespace SigOpsTools.API.Controllers
         }
 
         [HttpPost(template: "NewCrashDetected", Name = "NewCrash")]
-        public async Task<IActionResult> Post([FromBody] Incident incident)
+        public async Task<IActionResult> NewCrash([FromBody] Incident incident)
         {
             try
             {
@@ -140,7 +140,34 @@ namespace SigOpsTools.API.Controllers
                 var sendList = await CrashDataAccessLayer.SendTo(incident);
                 foreach (var i in sendList)
                 {
-                    var email = await e.SendGridEmailAsync(i.Item2, incident);
+                    var email = await e.SendGridEmailAsync(i, incident);
+                   return email ? Ok() : NotFound();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while recording the crash update.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error.");
+            }
+        }
+        [HttpPost(template: "CrashUpdated", Name = "UpdateCrash")]
+        public async Task<IActionResult> UpdateCrash([FromBody] Incident incident)
+        {
+            try
+            {
+                if (incident == null)
+                {
+                    return BadRequest();
+                }
+
+                //var newIncidents = await _crashDataAccessLayer.RecordCrashUpdateAsync(incident);
+                EmailSender e = new EmailSender();
+                var sendList = await CrashDataAccessLayer.SendTo(incident);
+                foreach (var i in sendList)
+                {
+                    var email = await e.SendGridEmailAsync(i, incident);
                    return email ? Ok() : NotFound();
                 }
 

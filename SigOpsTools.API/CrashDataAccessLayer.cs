@@ -160,7 +160,7 @@ namespace SigOpsTools.API
             {
                 return await GetByFilter(new Incident
                 {
-                    RoadwayName = roadwayName
+                    roadway_name = roadwayName
                 });
             }
             catch (Exception e)
@@ -181,7 +181,7 @@ namespace SigOpsTools.API
             {
                 return await GetByFilter(new Incident
                 {
-                    Subtype = subtype
+                    subtype = subtype
                 });
             }
             catch (Exception e)
@@ -197,7 +197,7 @@ namespace SigOpsTools.API
             {
                 return await GetByFilter(new Incident
                 {
-                    LanesAffected = lanesAffected
+                    lanes_affected = lanesAffected
                 });
             }
             catch (Exception e)
@@ -213,7 +213,7 @@ namespace SigOpsTools.API
             {
                 return GetByFilter(new Incident
                 {
-                    DateReported = DateTime.Now
+                    reported = DateTime.Now
                 });
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace SigOpsTools.API
                 //Determine if admin should get this email based on severity
 
                 // Determine the region parameter based on the input
-                switch (i.Region)
+                switch (i.region)
                 {
                     case "None":
                         regionParameter = "All Regions";
@@ -253,7 +253,7 @@ namespace SigOpsTools.API
                     case "Region 3":
                     case "Region 4":
                     case "Region 5":
-                        regionParameter = i.Region;
+                        regionParameter = i.region;
                         break;
                     default:
                         regionParameter = "All Regions";
@@ -263,7 +263,7 @@ namespace SigOpsTools.API
                 // Add the region parameter to the command
                 cmd.Parameters.AddWithValue("@Region", regionParameter);
 
-                if(i.LanesAffected == "All Lanes Blocked.")
+                if(i.lanes_affected == "All Lanes Blocked.")
                 {
                     cmd.CommandText += " AND Title = 'Admin'";
                 }
@@ -311,12 +311,6 @@ namespace SigOpsTools.API
                 if (MySqlConnection.State == ConnectionState.Open)
                     await MySqlConnection.CloseAsync();
             }
-
-            //In the crash_email_service table get the email address of the people in the correct region
-
-
-            //Switch case for region to determine who to send the email to
-            //Switch case for severity to determine who to send the email to
 
             return sendList;
         }
