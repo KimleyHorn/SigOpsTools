@@ -5,7 +5,7 @@ on:
     - 2-crash-data-email-service-not-sending-emails-to-anyone-but-brandon
 env:
   AZURE_FUNCTIONAPP_NAME: func-GDOTSigOps-prd-scus
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: IncidentServiceFINAL/published
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: IncidentEmailServiceProd/published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: IncidentServiceFINAL
