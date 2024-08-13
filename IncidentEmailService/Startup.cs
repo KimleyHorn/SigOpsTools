@@ -1,10 +1,9 @@
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using SigOpsTools.API; // Replace with your existing project's namespace
 
-[assembly: FunctionsStartup(typeof(MyFunctionApp.Startup))]
+[assembly: FunctionsStartup(typeof(IncidentEmailService.Startup))]
 
-namespace MyFunctionApp
+namespace IncidentEmailService
 {
     public class Startup : FunctionsStartup
     {
@@ -17,7 +16,7 @@ namespace MyFunctionApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Use the service configuration method from the existing project
-            var startup = new SigOpsTools.API;
+            var startup = new SigOpsTools.API.Startup(services);
             startup.ConfigureServices(services);
         }
     }

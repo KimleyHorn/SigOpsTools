@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "IncidentEmailServiceProd": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7170"
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7170"
+    }
+  }
+}

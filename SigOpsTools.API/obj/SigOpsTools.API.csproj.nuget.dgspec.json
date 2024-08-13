@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj": {}
+    "C:\\Development\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj": {
+    "C:\\Development\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj",
+        "projectUniqueName": "C:\\Development\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj",
         "projectName": "SigOpsTools.API",
-        "projectPath": "C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj",
+        "projectPath": "C:\\Development\\SigOps Tools\\SigOpsTools.API\\SigOpsTools.API.csproj",
         "packagesPath": "C:\\Users\\brandon.hall\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brandon.hall\\OneDrive - KH\\SigOps Tools\\SigOpsTools.API\\obj\\",
+        "outputPath": "C:\\Development\\SigOps Tools\\SigOpsTools.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brandon.hall\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,11 +48,11 @@
           "dependencies": {
             "AWSSDK.Core": {
               "target": "Package",
-              "version": "[3.7.400.1, )"
+              "version": "[3.7.400.4, )"
             },
             "AWSSDK.S3": {
               "target": "Package",
-              "version": "[3.7.400.1, )"
+              "version": "[3.7.400.4, )"
             },
             "Amazon.Lambda.S3Events": {
               "target": "Package",
@@ -68,11 +68,11 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "MySqlConnector": {
               "target": "Package",
@@ -92,7 +92,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[6.7.0, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",

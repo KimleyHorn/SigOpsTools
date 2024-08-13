@@ -1,9 +1,25 @@
 {
   "profiles": {
-    "IncidentEmailService": {
+    "AzureDebug": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7151",
-      "launchBrowser": false
+      "commandLineArgs": "--port 7071",
+      "environmentVariables": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "AzureProd": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7071",
+      "environmentVariables": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SENDGRID_API_KEY": "",
+        "FIVE_ONE_ONE_API_KEY": "",
+        "MYSQL_API_KEY": ""
+      }
     }
   }
 }

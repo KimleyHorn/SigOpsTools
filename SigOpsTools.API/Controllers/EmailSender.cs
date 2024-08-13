@@ -8,13 +8,13 @@ namespace SigOpsTools.API.Controllers;
 
 public class EmailSender
 {
-    readonly string apiKey = ConfigurationManager.AppSettings["SENDGRID_API_KEY"];
-    readonly string fromEmail = ConfigurationManager.AppSettings["SMTP_USER"] ?? "traction@kimley-horn.com";
+    private readonly string _apiKey = ConfigurationManager.AppSettings["SENDGRID_API_KEY"] ?? string.Empty;
+    private readonly string _fromEmail = ConfigurationManager.AppSettings["SMTP_USER"] ?? "traction@kimley-horn.com";
 
 
     public EmailSender()
     {
-        if (string.IsNullOrEmpty(apiKey))
+        if (string.IsNullOrEmpty(_apiKey))
         {
             throw new ArgumentNullException("SENDGRID_API_KEY", "API key must not be null or empty.");
         }
@@ -30,8 +30,8 @@ public class EmailSender
         var subject = $"New Incident Report at {i.roadway_name}";
         try
         {
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(fromEmail, fromName);
+            var client = new SendGridClient(_apiKey);
+            var from = new EmailAddress(_fromEmail, fromName);
             var to = new EmailAddress(recipient.Item2, recipient.Item1);
             var plainTextContent = totalContent.Item1;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
@@ -81,7 +81,7 @@ public class EmailSender
         }
         catch (Exception ex)
         {
-            // Handle exception, e.g., log error and use a default template or notify admin
+            Console.WriteLine("Email not created " + ex);
         }
 
         var htmlMessage = template
