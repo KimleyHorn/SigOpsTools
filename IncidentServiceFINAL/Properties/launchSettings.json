@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "IncidentServiceFINAL": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7255",
-      "launchBrowser": false
-    }
-  }
-}
